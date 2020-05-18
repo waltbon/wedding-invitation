@@ -10,8 +10,7 @@ export default class AppDocument extends Document {
     render() {
         return (
             <Html>
-                <Head>
-                    <title>Hookup - Free Bootstrap 4 Template by Colorlib</title>
+                <Head title="Boda Paola y Daniel">
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
