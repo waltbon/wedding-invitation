@@ -1,23 +1,23 @@
 import { NextPage } from 'next';
+import { DatoCMSService } from '../lib/dato-cms.service';
+import AcceptInvitationForm from '../components/AcceptInvitationForm';
 
-const IndexPage: NextPage<any> = ({}) => {
+const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
         <div className="container">
-          <a className="navbar-brand" href="index.html">Hookup</a>
+          <a className="navbar-brand" href="index.html">Pao &amp; Barbu</a>
           <button className="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="oi oi-menu" /> Menu
       </button>
           <div className="collapse navbar-collapse" id="ftco-nav">
             <ul className="navbar-nav nav ml-auto">
-              <li className="nav-item"><a href="#home-section" className="nav-link"><span>Home</span></a></li>
+              <li className="nav-item"><a href="#home-section" className="nav-link"><span>Inicio</span></a></li>
               <li className="nav-item"><a href="#groom-bride-section" className="nav-link"><span>Groom &amp; Bride</span></a></li>
               <li className="nav-item"><a href="#lovestory-section" className="nav-link"><span>Love Story</span></a></li>
-              <li className="nav-item"><a href="#greeting-section" className="nav-link"><span>Greetings</span></a></li>
-              <li className="nav-item"><a href="#people-section" className="nav-link"><span>People</span></a></li>
-              <li className="nav-item"><a href="#when-where-section" className="nav-link"><span>When &amp; Where</span></a></li>
-              <li className="nav-item"><a href="#rsvp-section" className="nav-link"><span>RSVP</span></a></li>
+              <li className="nav-item"><a href="#when-where-section" className="nav-link"><span>¿Cuando y dónde?</span></a></li>
+              <li className="nav-item"><a href="#rsvp-section" className="nav-link"><span>Confirmar asistencia</span></a></li>
               <li className="nav-item"><a href="#gallery-section" className="nav-link"><span>Gallery</span></a></li>
             </ul>
           </div>
@@ -53,7 +53,7 @@ const IndexPage: NextPage<any> = ({}) => {
               <div className="wrap">
                 <div className="row d-flex">
                   <div className="col-md-6 d-flex">
-                    <div className="img d-flex align-self-stretch align-items-center" style={{ backgroundImage: 'url(images/about.jpg)' }}>
+                    <div className="img d-flex align-self-stretch align-items-center" style={{ backgroundImage: 'url(images/about.jpeg)' }}>
                     </div>
                   </div>
                   <div className="col-md-6 py-md-5 text">
@@ -61,12 +61,13 @@ const IndexPage: NextPage<any> = ({}) => {
                       <div className="row justify-content-start pb-3">
                         <div className="col-md-12 ftco-animate p-4 p-lg-5 text-center">
                           <span className="subheading mb-4">Join us to celebrate <br />the wedding day of</span>
-                          <h2 className="mb-4">Francisco <span>&amp;</span> Laura</h2>
+                          <h2 className="mb-4 text-capitalize">Familia {autorizado ? familia.apellidos : ''}</h2>
                           <span className="icon flaticon-rose-variant-outline-with-vines" />
                           <span className="subheading">Which is celebration on</span>
                           <p className="time mb-4"><span>Dec | 28 | 2019</span></p>
                           <span className="subheading mb-5">Starting at 2:00 <br /> in the afternoon</span>
                           <span className="subheading mb-5">Saint John Paul Church <br /> in YorkNew.in</span>
+                          <a href="#rsvp-section" className="btn btn-success text-center">Confirmar asistencia</a>
                         </div>
                       </div>
                     </div>
@@ -181,180 +182,6 @@ const IndexPage: NextPage<any> = ({}) => {
           </div>
         </div>
       </section>
-      <section className="ftco-section bg-light" id="greeting-section">
-        <div className="container">
-          <div className="row justify-content-center pb-5">
-            <div className="col-md-12 text-center heading-section ftco-animate">
-              <span className="clone">Testimony</span>
-              <h2 className="mb-3">Sweet Messages</h2>
-            </div>
-          </div>
-          <div className="row ftco-animate">
-            <div className="col-md-12">
-              <div className="carousel-testimony owl-carousel ftco-owl">
-                <div className="item">
-                  <div className="testimony-wrap py-4">
-                    <div className="text">
-                      <p className="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <div className="d-flex align-items-center">
-                        <div className="user-img" style={{ backgroundImage: 'url(images/person_1.jpg)' }} />
-                        <div className="pl-3">
-                          <p className="name">Roger Scott</p>
-                          <span className="position">Marketing Manager</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimony-wrap py-4">
-                    <div className="text">
-                      <p className="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <div className="d-flex align-items-center">
-                        <div className="user-img" style={{ backgroundImage: 'url(images/person_2.jpg)' }} />
-                        <div className="pl-3">
-                          <p className="name">Roger Scott</p>
-                          <span className="position">Marketing Manager</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimony-wrap py-4">
-                    <div className="text">
-                      <p className="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <div className="d-flex align-items-center">
-                        <div className="user-img" style={{ backgroundImage: 'url(images/person_3.jpg)' }} />
-                        <div className="pl-3">
-                          <p className="name">Roger Scott</p>
-                          <span className="position">Marketing Manager</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimony-wrap py-4">
-                    <div className="text">
-                      <p className="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <div className="d-flex align-items-center">
-                        <div className="user-img" style={{ backgroundImage: 'url(images/person_1.jpg)' }} />
-                        <div className="pl-3">
-                          <p className="name">Roger Scott</p>
-                          <span className="position">Marketing Manager</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimony-wrap py-4">
-                    <div className="text">
-                      <p className="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <div className="d-flex align-items-center">
-                        <div className="user-img" style={{ backgroundImage: 'url(images/person_2.jpg)' }} />
-                        <div className="pl-3">
-                          <p className="name">Roger Scott</p>
-                          <span className="position">Marketing Manager</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="ftco-section" id="people-section">
-        <div className="container-fluid px-md-5">
-          <div className="row justify-content-center pb-5">
-            <div className="col-md-12 text-center heading-section ftco-animate">
-              <span className="clone">People</span>
-              <h2 className="mb-3">Family &amp; Friends</h2>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12">
-              <div className="carousel-friends owl-carousel ftco-owl ftco-animate">
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/groom-men-1.jpg)' }} />
-                    <div className="text">
-                      <h3>Mark Tomy</h3>
-                      <span>Groomsmen</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/groom-men-2.jpg)' }} />
-                    <div className="text">
-                      <h3>John Henceworth</h3>
-                      <span>Groomsmen</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/groom-men-3.jpg)' }} />
-                    <div className="text">
-                      <h3>Rey Cooper</h3>
-                      <span>Groomsmen</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/groom-men-4.jpg)' }} />
-                    <div className="text">
-                      <h3>Robert Chan</h3>
-                      <span>Groomsmen</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/bridesmaid-1.jpg)' }} />
-                    <div className="text">
-                      <h3>Rose Jones</h3>
-                      <span>Bridesmaid</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/bridesmaid-2.jpg)' }} />
-                    <div className="text">
-                      <h3>Mary Dell</h3>
-                      <span>Bridesmaid</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/bridesmaid-3.jpg)' }} />
-                    <div className="text">
-                      <h3>Alicia Brean</h3>
-                      <span>Bridesmaid</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="people text-center">
-                    <div className="img" style={{ backgroundImage: 'url(images/bridesmaid-4.jpg)' }} />
-                    <div className="text">
-                      <h3>Angel Worth</h3>
-                      <span>Bridesmaid</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section className="ftco-section bg-light" id="when-where-section">
         <div className="container">
           <div className="row justify-content-center pb-5">
@@ -403,50 +230,25 @@ const IndexPage: NextPage<any> = ({}) => {
           </div>
         </div>
       </section>
-      <section className="ftco-section bg-secondary" id="rsvp-section">
-        <div className="container">
-          <div className="row justify-content-center pb-5">
-            <div className="col-md-12 text-center heading-section ftco-animate">
-              <span className="clone">RSVP</span>
-              <h2 className="mb-3">Are Your Attending?</h2>
+      {
+        autorizado &&
+        <section className="ftco-section bg-secondary" id="rsvp-section">
+          <div className="container">
+            <div className="row justify-content-center pb-5">
+              <div className="col-md-12 text-center heading-section ftco-animate">
+                <span className="clone">RSVP</span>
+                <h2 className="mb-3">Are Your Attending?</h2>
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              <div className="col-md-7">
+                  <AcceptInvitationForm familia={familia} invitados={invitados} />  
+              </div>
             </div>
           </div>
-          <div className="row justify-content-center">
-            <div className="col-md-7">
-              <form action="#" className="rsvp-form ftco-animate">
-                <div>
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Name" />
-                  </div>
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Your email" />
-                  </div>
-                </div>
-                <div>
-                  <div className="form-group">
-                    <div className="form-field">
-                      <div className="select-wrap">
-                        <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-arrow-down" /></div>
-                        <select name="guests" className="form-control">
-                          <option value={null}>Guest</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="form-group">
-                    <textarea name="message" cols={30} rows={2} className="form-control" placeholder="Message" defaultValue={""} />
-                  </div>
-                  <div className="form-group">
-                    <input type="submit" defaultValue="I am attending" className="btn btn-primary py-3 px-4" />
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
+      }
       <section className="ftco-section" id="gallery-section">
         <div className="container-fluid px-md-4">
           <div className="row justify-content-center pb-5">
@@ -580,5 +382,58 @@ const IndexPage: NextPage<any> = ({}) => {
     </>);
 }
 
+const CMS_FAMILIA_QUERY = (familia: string) => `query {
+  family(filter: {slug: {eq: "${familia}"}}) {
+    slug
+    codigo
+    apellidos
+    id
+  }
+}
+
+`
+
+const CMS_QUERY = (familiaSlug: string) => `query {
+  allInvitados(filter: {familia: {eq: "${familiaSlug}"}}) {
+    familia {
+      apellidos
+      codigo
+      id
+      slug
+    }
+    nombre
+    slug
+    id
+    aceptado
+  }
+}`;
+
+IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
+  let autorizado = false;
+  const service = new DatoCMSService();
+  const familiaSlug = query ? query.familia as string : '';
+
+  const familiaData = await service.executeQuery<any>({ query: CMS_FAMILIA_QUERY(familiaSlug)});
+  console.log("familiaData", familiaData)
+
+  autorizado = !!familiaData && !!familiaData.family;
+
+  let invitadosData: any;
+  let invitados: [];
+  if (autorizado) {
+    invitadosData = await service.executeQuery<any>({
+      query: CMS_QUERY(familiaData.family.id)
+    });
+    invitados = autorizado ? invitadosData.allInvitados : [];
+  }
+
+  console.log("invitados", invitados);
+
+  return {
+    invitados,
+    familia: familiaData.family,
+    autorizado
+  }
+}
 
 export default IndexPage;
