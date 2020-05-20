@@ -21,10 +21,10 @@ export default class extends React.Component<{
     e.preventDefault();
     const data = {
       invitado: this.props.invitado,
-      aceptado: accepted ? 'Sí' : 'No'
+      aceptado: accepted ? 'Sí aceptó' : 'No aceptó'
     };
     console.log("extends -> sendConfirmation -> data", data);
-    // await executePost('/api/invitation-confirmation', data);
+    await executePost('/api/invitation-confirmation', data);
     this.setState({
       sent: true
     })
@@ -50,7 +50,7 @@ export default class extends React.Component<{
           <div className="row text-left" hidden={this.state.sent}>
             <div className="col-sm-12">
               <button type="button" onClick={(e) => this.sendConfirmation(e, true)} defaultValue="Si" className="btn btn-success py-3 px-4 mr-3" >Confirmo asistencia</button>
-              <button type="button" onClick={(e) => this.sendConfirmation(e, false)} defaultValue="No" className="btn btn-danger py-3 px-4" >No asistiré</button>
+              <button type="button" onClick={(e) => this.sendConfirmation(e, false)} defaultValue="No" className="btn btn-danger py-3 px-4 pt-2" >No asistiré</button>
             </div>
           </div>
 

@@ -46,12 +46,12 @@ const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
                       <div className="row justify-content-start pb-3">
                         <div className="col-md-12 ftco-animate p-4 p-lg-5 text-center">
                           <span className="subheading mb-4">
-                            Hola <br/> {invitado.nombre}
-                            Te invitamos a <br />the wedding day of</span>
+                            <span className="text-secondary">{invitado.nombre} </span> <br/>
+                            Te invitamos a <br /> nuestra boda </span>
                           <h2 className="mb-4 text-capitalize">Montiel Bonilla</h2>
                           <span className="icon flaticon-rose-variant-outline-with-vines" />
-                          <span className="subheading">Which is celebration on</span>
-                          <p className="time mb-4"><span>19 de junio, 2020</span></p>
+                          <span className="subheading">Que se celebrará el</span>
+                          <p className="time mb-4"><span>19 junio, 2020</span></p>
                           <span className="subheading mb-5">Inicio 5:30</span>
                           <span className="subheading mb-5">Estancia Novillo <br />Escazú</span>
                         </div>
@@ -75,7 +75,7 @@ const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
           <div className="row justify-content-center">
             <div className="col-md-10">
               <div className="row">
-                <div className="col-md-12 text-left ">
+                <div className="col-md-12 text-justify ">
                   <p>
                     Queremos hacerte partícipe de una gran noticia. Hace unos días Estancia Novillo nos informó que el <strong> Ministerio de Salud</strong> aprobó el protocolo para celebrar nuestra boda con los respectivos cuidados sanitarios. Para nosotros fue una sorpresa enorme y nos sentimos muy dichosos de tener esta oportunidad.
                   </p>
