@@ -1,31 +1,16 @@
 import { NextPage } from 'next';
 import { DatoCMSService } from '../lib/dato-cms.service';
 import AcceptInvitationForm from '../components/AcceptInvitationForm';
+import Navigation from '../components/Navigation';
 
-const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
+const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
-        <div className="container">
-          <a className="navbar-brand" href="index.html">Pao &amp; Barbu</a>
-          <button className="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="oi oi-menu" /> Menu
-      </button>
-          <div className="collapse navbar-collapse" id="ftco-nav">
-            <ul className="navbar-nav nav ml-auto">
-              <li className="nav-item"><a href="#home-section" className="nav-link"><span>Inicio</span></a></li>
-              <li className="nav-item"><a href="#groom-bride-section" className="nav-link"><span>Groom &amp; Bride</span></a></li>
-              <li className="nav-item"><a href="#lovestory-section" className="nav-link"><span>Love Story</span></a></li>
-              <li className="nav-item"><a href="#when-where-section" className="nav-link"><span>¿Cuando y dónde?</span></a></li>
-              <li className="nav-item"><a href="#rsvp-section" className="nav-link"><span>Confirmar asistencia</span></a></li>
-              <li className="nav-item"><a href="#gallery-section" className="nav-link"><span>Gallery</span></a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
       <section id="home" className="video-hero js-fullheight" style={{ height: '700px', backgroundImage: 'url(images/bg_1.jpg)', backgroundSize: 'cover', backgroundPosition: 'top center' }} data-stellar-background-ratio="0.5">
         <div className="overlay" />
-        <a className="player" data-property="{videoURL:'https://www.youtube.com/watch?v=Mjjw19B7rMk',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default',optimizeDisplay:true}" />
+        {/* <a className="player" data-property="{videoURL:'https://www.youtube.com/watch?v=Mjjw19B7rMk',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default',optimizeDisplay:true}" /> */}
+        <span></span>
         <div className="container">
           <div className="row js-fullheight justify-content-center d-flex align-items-center">
             <div className="col-md-12">
@@ -33,8 +18,8 @@ const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
                 <div className="icon">
                   <span className="flaticon-rose-outline-variant-with-vines-and-leaves" />
                 </div>
-                <span className="subheading">The Wedding of</span>
-                <h1>Barbu &amp; Payo</h1>
+                <span className="subheading">Boda </span>
+                <h1>Daniel &amp; Paola</h1>
                 <div id="timer" className="d-flex">
                   <div className="time" id="days" />
                   <div className="time pl-3" id="hours" />
@@ -60,14 +45,15 @@ const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
                     <div className="py-md-4">
                       <div className="row justify-content-start pb-3">
                         <div className="col-md-12 ftco-animate p-4 p-lg-5 text-center">
-                          <span className="subheading mb-4">Join us to celebrate <br />the wedding day of</span>
-                          <h2 className="mb-4 text-capitalize">Familia {autorizado ? familia.apellidos : ''}</h2>
+                          <span className="subheading mb-4">
+                            Hola <br/> {invitado.nombre}
+                            Te invitamos a <br />the wedding day of</span>
+                          <h2 className="mb-4 text-capitalize">Montiel Bonilla</h2>
                           <span className="icon flaticon-rose-variant-outline-with-vines" />
                           <span className="subheading">Which is celebration on</span>
-                          <p className="time mb-4"><span>Dec | 28 | 2019</span></p>
-                          <span className="subheading mb-5">Starting at 2:00 <br /> in the afternoon</span>
-                          <span className="subheading mb-5">Saint John Paul Church <br /> in YorkNew.in</span>
-                          <a href="#rsvp-section" className="btn btn-success text-center">Confirmar asistencia</a>
+                          <p className="time mb-4"><span>19 de junio, 2020</span></p>
+                          <span className="subheading mb-5">Inicio 5:30</span>
+                          <span className="subheading mb-5">Estancia Novillo <br />Escazú</span>
                         </div>
                       </div>
                     </div>
@@ -78,42 +64,91 @@ const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
           </div>
         </div>
       </section>
-      <section className="ftco-section bg-section">
+      <section className="ftco-section bg-section" style={{ marginBottom: 0, paddingBottom: '60px !important' }}>
         <div className="overlay-top" style={{ backgroundImage: 'url(images/top-bg.jpg)' }} />
-        <div className="overlay-bottom" style={{ backgroundImage: 'url(images/bottom-bg.jpg)' }} />
         <div className="container">
           <div className="row justify-content-center pb-5">
             <div className="col-md-12 text-center heading-section ftco-animate">
-              <span className="clone">Bride &amp; Groom</span>
-              <h2 className="mb-3">Bride &amp; Groom</h2>
+              <h2 className="mb-3">Nuestra boda</h2>
             </div>
           </div>
           <div className="row justify-content-center">
             <div className="col-md-10">
               <div className="row">
-                <div className="col-md-6 text-center d-flex align-items-stretch">
-                  <div className="bride-groom ftco-animate">
-                    <div className="img" style={{ backgroundImage: 'url(images/groom.jpg)' }} />
-                    <div className="text mt-4 px-4">
-                      <h2>Francisco Fredricksen</h2>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 text-center d-flex align-items-stretch">
-                  <div className="bride-groom ftco-animate">
-                    <div className="img" style={{ backgroundImage: 'url(images/bride.jpg)' }} />
-                    <div className="text mt-4 px-4">
-                      <h2>Laura Moorey</h2>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                    </div>
-                  </div>
+                <div className="col-md-12 text-left ">
+                  <p>
+                    Queremos hacerte partícipe de una gran noticia. Hace unos días Estancia Novillo nos informó que el <strong> Ministerio de Salud</strong> aprobó el protocolo para celebrar nuestra boda con los respectivos cuidados sanitarios. Para nosotros fue una sorpresa enorme y nos sentimos muy dichosos de tener esta oportunidad.
+                  </p>
+                  <p>
+                    Con esta gran noticia, queremos invitarte a compartir una cena íntima en familia para celebrar nuestra unión. Sabemos que son tiempos distintos, y muchas cosas cambian, así que para nosotros es muy importante que vos y todos nuestros invitados se sientan seguros de su bienestar. Por lo tanto, te compartimos algunos detalles relevantes de nuestra boda:
+                            </p>
+                  <ul>
+                    <li>Consistirá en una ceremonia y una cena únicamente. No habrá baile, ni DJ, ni ninguna actividad que signifique el rompimiento del distanciamiento social.
+  </li>
+
+                    <li>
+                      Durante la cena, tendremos meseros que nos servirán la comida hasta la mesa, para que nadie tenga que trasladarse al estilo buffet.
+
+  </li>
+                    <li>
+                      La cantidad de invitados no superará el 45% de la capacidad de La Estancia, por lo tanto tendremos suficiente espacio para que las mesas estén organizadas de tal forma que puedan sentarse con su respectiva “burbuja social” según los nuevos permisos del Ministerio de Salud.
+
+  </li>
+                    <li>
+                      Todos nuestros invitados estarán ubicados en las mesas desde el inicio de la ceremonia y desde ahí podrán disfrutar de la misma. No habrá traslados a distintas ubicaciones.
+
+  </li>
+                    <li>
+                      La Estancia estará reservada única y exclusivamente para nuestra actividad.
+  </li>
+                    <li>
+                      Tendremos habilitado suficiente alcohol en gel para cada mesa y en La Estancia.
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <section className="ftco-section bg-light">
+        <div className="container">
+          <div className="row justify-content-center pb-5">
+            <div className="col-md-12 text-center heading-section ftco-animate">
+              <h2 className="mb-3">Confirmar Asistencia</h2>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-md-10">
+              <div className="row">
+                <div className="col-md-12 text-left ">
+                  <p>
+                    Estamos muy emocionados por compartir este día en compañía de todos, pero también entendemos si por alguna razón, y a pesar de las medidas sanitarias, no quisieran acompañarnos por prevención a la situación.
+                  </p>
+                  <p>
+                    <strong>
+                      En ese caso, valoraremos mucho que anticipadamente nos puedan avisar para organizar de la mejor forma a nuestros asistentes.
+                      En caso que sí nos acompañes, te agradecemos que nos confirmes tu asistencia a más tardar el Miércoles 27 de Mayo.
+                    </strong>
+                  </p>
+                  <p>
+                    Para nosotros sin duda el regalo más grande es nuestra familia y amigos, pero también hemos preparado una lista de regalos de boda en la tienda SIMAN (Multiplaza Este y Escazú) en caso que quieras bendecirnos en el inicio de nuestra historia. ¡Lo recibiremos con alegría y gratitud!
+
+                    Si compras de manera presencial, puedes dar el nombre y código de nuestra lista: Montiel Bonilla, 121475
+                    Si lo haces de manera online, este es el link donde puedes elegir tu regalo: FALTA LINK
+
+                    Un abrazo,
+                    Daniel y Paola
+                  </p>
+                  <AcceptInvitationForm invitado={invitado} burbuja={burbuja} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="ftco-section" id="lovestory-section">
         <div className="container">
           <div className="row justify-content-center pb-5">
@@ -230,25 +265,6 @@ const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
           </div>
         </div>
       </section>
-      {
-        autorizado &&
-        <section className="ftco-section bg-secondary" id="rsvp-section">
-          <div className="container">
-            <div className="row justify-content-center pb-5">
-              <div className="col-md-12 text-center heading-section ftco-animate">
-                <span className="clone">RSVP</span>
-                <h2 className="mb-3">Are Your Attending?</h2>
-              </div>
-            </div>
-            <div className="row justify-content-center">
-              <div className="col-md-7">
-                  <AcceptInvitationForm familia={familia} invitados={invitados} />  
-              </div>
-            </div>
-          </div>
-        </section>
-
-      }
       <section className="ftco-section" id="gallery-section">
         <div className="container-fluid px-md-4">
           <div className="row justify-content-center pb-5">
@@ -383,7 +399,7 @@ const IndexPage: NextPage<any> = ({ familia, invitados, autorizado }) => {
 }
 
 const CMS_FAMILIA_QUERY = (familia: string) => `query {
-  family(filter: {slug: {eq: "${familia}"}}) {
+  family(filter: {id: {eq: "${familia}"}}) {
     slug
     codigo
     apellidos
@@ -408,29 +424,47 @@ const CMS_QUERY = (familiaSlug: string) => `query {
   }
 }`;
 
+const INVITADO_QUERY = (invitadoSlug: string) => `query {
+  invitado(filter: {slug: {eq: "${invitadoSlug}"}}) {
+    familia {
+      apellidos
+      codigo
+      id
+      slug
+    }
+    nombre
+    slug
+    id
+    aceptado
+  }
+}`;
+
 IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
   let autorizado = false;
   const service = new DatoCMSService();
-  const familiaSlug = query ? query.familia as string : '';
+  const invitadoSlug = query ? query.invitado as string : '';
+  console.log("invitadoSlug", invitadoSlug)
+  const invitadoResult = await service.executeQuery<any>({ query: INVITADO_QUERY(invitadoSlug) });
+  const invitado = invitadoResult.invitado;
+  console.log("invitado", invitado)
 
-  const familiaData = await service.executeQuery<any>({ query: CMS_FAMILIA_QUERY(familiaSlug)});
+  const familiaData = await service.executeQuery<any>({ query: CMS_FAMILIA_QUERY(invitado.familia.id) });
   console.log("familiaData", familiaData)
-
   autorizado = !!familiaData && !!familiaData.family;
 
   let invitadosData: any;
-  let invitados: [];
+  let burbuja: [];
+
   if (autorizado) {
     invitadosData = await service.executeQuery<any>({
       query: CMS_QUERY(familiaData.family.id)
     });
-    invitados = autorizado ? invitadosData.allInvitados : [];
+    burbuja = autorizado ? invitadosData.allInvitados : [];
   }
 
-  console.log("invitados", invitados);
-
   return {
-    invitados,
+    burbuja,
+    invitado,
     familia: familiaData.family,
     autorizado
   }

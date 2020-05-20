@@ -2,62 +2,32 @@ import React from 'react';
 import { executePost } from '../lib/api-call';
 
 interface IState {
-  invitados: any[];
-  respuestas: {
-    id: string;
-    nombre: string;
-    aceptado: boolean;
-  }[];
-  data: {
-    familia: any;
-  }
+  sent: boolean;
 }
 
 export default class extends React.Component<{
-  invitados: any[],
-  familia: any
+  burbuja: any[],
+  invitado: any,
 }, IState> {
   constructor(props) {
     super(props);
-    this.onHandleChange = this.onHandleChange.bind(this);
-    this.onHandleSubmit = this.onHandleSubmit.bind(this);
+    this.sendConfirmation = this.sendConfirmation.bind(this);
     this.state = {
-      invitados: props.invitados,
-      respuestas: props.invitados.map(inv => {
-        return {
-          id: inv.id,
-          nombre: inv.nombre,
-          aceptado: false
-        }
-      }),
-      data: {
-        familia: props.familia,
-      }
-    } 
+      sent: false
+    }
   }
 
-  onHandleChange(e) {
-    const { name, value, checked } = e.target;
-    console.log("extends -> onHandleChange -> e.target", e.target);
-
-    const { respuestas } = this.state;
-    const invitado = respuestas.find(inv => inv.id === name);
-    invitado.aceptado = checked;
-    this.setState({
-      respuestas
-    });
-    console.log("extends -> onHandleChange -> this.state.invitados", this.state.respuestas);
-  }
-  
-  async onHandleSubmit(e) {
+  async sendConfirmation(e, accepted: boolean) {
     e.preventDefault();
     const data = {
-      respuestas: this.state.respuestas,
-      familia: this.state.data.familia
+      invitado: this.props.invitado,
+      aceptado: accepted ? 'Sí' : 'No'
     };
-    console.log("extends -> onHandleSubmit -> data", data)
-    
-    await executePost('/api/invitation-confirmation', data);
+    console.log("extends -> sendConfirmation -> data", data);
+    // await executePost('/api/invitation-confirmation', data);
+    this.setState({
+      sent: true
+    })
   }
 
 
@@ -65,38 +35,31 @@ export default class extends React.Component<{
 
   render() {
     return (
-      <form className="rsvp-form ftco-animate" noValidate onSubmit={this.onHandleSubmit}>
+      <div className="pt-4">
+        <h5>Burbuja asignada</h5>
+        <p className="pb-4">
+          {
+            Array.isArray(this.props.burbuja) && this.props.burbuja.map(inv => {
+            return (
+              <span style={{ paddingRight: 12 }}>{inv.nombre} <br/> </span>
+            )
+            })
+          }
+        </p>
         <div>
-          <div className="form-group">
-            <input type="text" className="form-control" placeholder="Name" />
+          <div className="row text-left" hidden={this.state.sent}>
+            <div className="col-sm-12">
+              <button type="button" onClick={(e) => this.sendConfirmation(e, true)} defaultValue="Si" className="btn btn-success py-3 px-4 mr-3" >Confirmo asistencia</button>
+              <button type="button" onClick={(e) => this.sendConfirmation(e, false)} defaultValue="No" className="btn btn-danger py-3 px-4" >No asistiré</button>
+            </div>
           </div>
-          <div className="form-group">
-            <input type="text" className="form-control" placeholder="Your email" />
+
+
+          <div className="row text-left" hidden={!this.state.sent}>
+            <h4>Gracias, hemos recibido tu respuesta!</h4>
           </div>
         </div>
-        <div>
-          <div className="form-group">
-            {
-              Array.isArray(this.props.invitados) && this.props.invitados.map(inv => {
-                return (
-                <div key={inv.id}>
-                  <input onChange={this.onHandleChange} type="checkbox" defaultChecked={inv.aceptado} id={inv.id} name={inv.id} value={inv.id} />
-                  <label htmlFor={inv.id}> {inv.nombre}</label>
-                  <br />
-                </div>)
-              })
-            }
-          </div>
-        </div>
-        <div>
-          <div className="form-group">
-            <textarea name="message" cols={30} rows={2} className="form-control" placeholder="Message" defaultValue={""} />
-          </div>
-          <div className="form-group">
-            <button type="submit" defaultValue="Enviar confirmación" className="btn btn-primary py-3 px-4" >Enviar invitation</button>
-          </div>
-        </div>
-      </form>
+      </div>
     )
   }
 }
