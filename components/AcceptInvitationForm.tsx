@@ -6,8 +6,8 @@ interface IState {
 }
 
 export default class extends React.Component<{
-  burbuja: any[],
-  invitado: any,
+  family: any,
+  invited: any,
 }, IState> {
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ export default class extends React.Component<{
   async sendConfirmation(e, accepted: boolean) {
     e.preventDefault();
     const data = {
-      invitado: this.props.invitado,
+      invitado: this.props.invited,
       aceptado: accepted ? 'Sí aceptó' : 'No aceptó'
     };
     console.log("extends -> sendConfirmation -> data", data);
@@ -30,28 +30,29 @@ export default class extends React.Component<{
     })
   }
 
-
-
-
   render() {
+    const hasMembers = this.props.family && Array.isArray(this.props.family.members) && !!this.props.family.members.length;
     return (
       <div className="pt-4">
-        <h5>Burbuja asignada</h5>
-        <p className="pb-4">
+        <h5 className="mb-4">Por favor confirma quiénes de la familia {this.props.family.apellidos} asistirán</h5>
+        <div className="px-4 mb-5">
           {
-            Array.isArray(this.props.burbuja) && this.props.burbuja.map(inv => {
-            return (
-              <span style={{ paddingRight: 12 }}>{inv.nombre} <br/> </span>
-            )
+            hasMembers && this.props.family.members.map(inv => {
+              return (
+                <div className="row mb-4 pretty p-icon p-round">
+                  <input type="checkbox" name={inv.slug} id={inv.slug} />
+                  <div className="state p-success">
+                    <i className="icon mdi mdi-check"></i>
+                    <label> {inv.nombre}</label>
+                  </div>
+                </div>
+              )
             })
           }
-        </p>
+        </div>
         <div>
           <div className="row text-left" hidden={this.state.sent}>
-            <div className="col-sm-12">
-              <button type="button" onClick={(e) => this.sendConfirmation(e, true)} defaultValue="Si" className="btn btn-success py-3 px-4 mr-3" >Confirmo asistencia</button>
-              <button type="button" onClick={(e) => this.sendConfirmation(e, false)} defaultValue="No" className="btn btn-danger py-3 px-4 pt-2" >No asistiré</button>
-            </div>
+            <button type="button" onClick={(e) => this.sendConfirmation(e, true)} defaultValue="Si" className="btn btn-primary py-3 px-4 mr-3" >Enviar respuesta </button>
           </div>
 
 

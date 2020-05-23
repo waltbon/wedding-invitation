@@ -3,11 +3,11 @@ import { DatoCMSService } from '../lib/dato-cms.service';
 import AcceptInvitationForm from '../components/AcceptInvitationForm';
 import Navigation from '../components/Navigation';
 
-const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
+const IndexPage: NextPage<any> = ({ family, invited, foto }) => {
   return (
     <>
       <Navigation />
-      <section id="home" className="video-hero js-fullheight" style={{ height: '700px', backgroundImage: 'url(images/bg_1.jpg)', backgroundSize: 'cover', backgroundPosition: 'top center' }} data-stellar-background-ratio="0.5">
+      <section id="home" className="video-hero js-fullheight" style={{ height: '700px', backgroundImage: `url(${foto.principal.url})`, backgroundSize: 'cover', backgroundPosition: 'top center' }} data-stellar-background-ratio="0.5">
         <div className="overlay" />
         {/* <a className="player" data-property="{videoURL:'https://www.youtube.com/watch?v=Mjjw19B7rMk',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default',optimizeDisplay:true}" /> */}
         <span></span>
@@ -46,7 +46,10 @@ const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
                       <div className="row justify-content-start pb-3">
                         <div className="col-md-12 ftco-animate p-4 p-lg-5 text-center">
                           <span className="subheading mb-4">
-                            <span className="text-secondary">{invitado.nombre} </span> <br/>
+                            {
+                              invited && invited.nombre &&
+                              <span className="text-secondary">{invited.nombre} </span>
+                            }
                             Te invitamos a <br /> nuestra boda </span>
                           <h2 className="mb-4 text-capitalize">Montiel Bonilla</h2>
                           <span className="icon flaticon-rose-variant-outline-with-vines" />
@@ -141,7 +144,7 @@ const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
                     Un abrazo,
                     Daniel y Paola
                   </p>
-                  <AcceptInvitationForm invitado={invitado} burbuja={burbuja} />
+                  <AcceptInvitationForm family={family} invited={invited} />
                 </div>
               </div>
             </div>
@@ -274,46 +277,17 @@ const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-1.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-1.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-2.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-2.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-3.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-3.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-4.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-4.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-5.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-5.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-6.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-6.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-7.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-7.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
-            <div className="col-md-3 ftco-animate">
-              <a href="images/gallery-8.jpg" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(images/gallery-8.jpg)' }}>
-                <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
-              </a>
-            </div>
+            {
+              foto && Array.isArray(foto.galeria) && foto.galeria.map(f => {
+                return (
+                <div className="col-md-3 ftco-animate">
+                  <a href="#" className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: `url(${f.url})` }}>
+                    <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
+                  </a>
+                </div>
+                )
+              })
+            }
           </div>
         </div>
       </section>
@@ -398,76 +372,112 @@ const IndexPage: NextPage<any> = ({ familia, burbuja, invitado }) => {
     </>);
 }
 
-const CMS_FAMILIA_QUERY = (familia: string) => `query {
-  family(filter: {id: {eq: "${familia}"}}) {
-    slug
-    codigo
-    apellidos
-    id
-  }
+const getFamily = async (familiaSlug: string) => {
+  const service = new DatoCMSService();
+  const result = await service.executeQuery<any>({
+    query: `query {
+    family(filter: {slug: {eq: "${familiaSlug}"}}) {
+      slug
+      codigo
+      apellidos
+      id
+    }
+  }`});
+
+  return result.family;
+};
+
+const getInvited = async (invitadoSlug: string) => {
+  const service = new DatoCMSService();
+  const invitadoResult = await service.executeQuery<any>({
+    query: `query {
+      invitado(filter: {slug: {eq: "${invitadoSlug}"}}) {
+        familia {
+          apellidos
+          codigo
+          id
+          slug
+        }
+        nombre
+        slug
+        id
+        aceptado
+      }
+    }`
+  });
+  const invitado = invitadoResult.invitado;
+  return invitado;
 }
 
-`
-
-const CMS_QUERY = (familiaSlug: string) => `query {
-  allInvitados(filter: {familia: {eq: "${familiaSlug}"}}) {
-    familia {
-      apellidos
-      codigo
-      id
-      slug
-    }
-    nombre
-    slug
-    id
-    aceptado
-  }
-}`;
-
-const INVITADO_QUERY = (invitadoSlug: string) => `query {
-  invitado(filter: {slug: {eq: "${invitadoSlug}"}}) {
-    familia {
-      apellidos
-      codigo
-      id
-      slug
-    }
-    nombre
-    slug
-    id
-    aceptado
-  }
-}`;
+const getFamilyMembers = async (familyId: string) => {
+  const service = new DatoCMSService();
+  const result = await service.executeQuery<any>({
+    query: `query {
+      allInvitados(filter: {familia: {eq: "${familyId}"}}) {
+        familia {
+          apellidos
+          codigo
+          id
+          slug
+        }
+        nombre
+        slug
+        id
+        aceptado
+      }
+    }`
+  });
+  return result.allInvitados;
+}
 
 IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
-  let autorizado = false;
-  const service = new DatoCMSService();
   const invitadoSlug = query ? query.invitado as string : '';
-  console.log("invitadoSlug", invitadoSlug)
-  const invitadoResult = await service.executeQuery<any>({ query: INVITADO_QUERY(invitadoSlug) });
-  const invitado = invitadoResult.invitado;
-  console.log("invitado", invitado)
+  const familiaSlug = query ? query.familia as string : '';
 
-  const familiaData = await service.executeQuery<any>({ query: CMS_FAMILIA_QUERY(invitado.familia.id) });
-  console.log("familiaData", familiaData)
-  autorizado = !!familiaData && !!familiaData.family;
+  const service = new DatoCMSService();
+  const fotoResult = await service.executeQuery<any>({
+    query: `query {
+      foto {
+        principal {
+          url
+          alt
+        }
+        galeria {
+          url
+        }
+      }
+    }`
+  });
 
-  let invitadosData: any;
-  let burbuja: [];
+  const tipoInvitado = !!invitadoSlug ? 'inv' : !!familiaSlug ? 'fam' : null;
+  console.log("tipoInvitado", tipoInvitado)
 
-  if (autorizado) {
-    invitadosData = await service.executeQuery<any>({
-      query: CMS_QUERY(familiaData.family.id)
-    });
-    burbuja = autorizado ? invitadosData.allInvitados : [];
+  let family;
+  let invited;
+  switch (tipoInvitado) {
+    case 'fam':
+      family = await getFamily(familiaSlug);
+      break;
+    case 'inv':
+      invited = await getInvited(invitadoSlug);
+      family = invited.family;
+      break;
+    default:
+      break;
   }
 
-  return {
-    burbuja,
-    invitado,
-    familia: familiaData.family,
-    autorizado
+  if (family) {
+    const familyMembers = await getFamilyMembers(family.id);
+    family['members'] = familyMembers || [];
   }
+
+  const data = {
+    invited,
+    family,
+    foto: fotoResult.foto
+  }
+  console.log("data", data)
+  return data;
 }
 
 export default IndexPage;

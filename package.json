@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mdi/font": "^5.2.45",
     "axios": "^0.19.2",
     "graphql-request": "^1.8.2",
     "mailgun-js": "^0.22.0",
