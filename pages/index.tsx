@@ -39,7 +39,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
               <div className="wrap">
                 <div className="row d-flex">
                   <div className="col-md-6 d-flex">
-                    <div className="img d-flex align-self-stretch align-items-center" style={{ backgroundImage: 'url(images/about.jpeg)' }}>
+                    <div className="img d-flex align-self-stretch align-items-center" style={{ backgroundImage: `url(${foto.info ? foto.info : '/images/about.jpeg' })` }}>
                     </div>
                   </div>
                   <div className="col-md-6 py-md-5 text">
@@ -56,7 +56,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
                           <span className="icon flaticon-rose-variant-outline-with-vines" />
                           <span className="subheading">Que se celebrará el</span>
                           <p className="time mb-4"><span>19 junio, 2020</span></p>
-                          <span className="subheading mb-5">Inicio 5:30</span>
+                          <span className="subheading mb-5">Inicio {info.horaInicio}</span>
                           <a href={info.urlUbicacionWaze}>
                           <span className="subheading">
                             <i className="mdi mdi-map-marker"></i>Estancia Novillo, Escazú (ver en Waze)
@@ -267,6 +267,7 @@ IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
         seccionNuestraBoda
         seccionConfirmarAsistencia
         urlUbicacionWaze
+        horaInicio
         itinerario {
           id
           titulo
@@ -285,6 +286,10 @@ IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
         }
       }
       foto {
+        info {
+          url
+          alt
+        }
         principal {
           url
           alt
