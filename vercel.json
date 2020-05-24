@@ -2,7 +2,7 @@
   "functions": {
     "api/invitation-confirmation.ts": {
       "memory": 1024,
-      "maxDuration": 60
+      "maxDuration": 10
     }
   }
 }
