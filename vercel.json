@@ -1,7 +1,4 @@
 {
-  "builds": [
-    { "src": "*.ts", "use": "@now/node" }
-  ],
     "routes": [
       { "src": "/", "headers": {"cache-control": "s-maxage=1000"}, "dest": "/" },
       { "src": "/api/invitation-confirmation", "methods": ["POST"], "dest": "/api/invitation-confirmation.ts" }
