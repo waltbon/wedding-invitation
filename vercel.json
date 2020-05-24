@@ -5,6 +5,7 @@
     ],
     "functions": {
       "api/invitation-confirmation.ts": { 
+        "maxDuration": 10
       }
     }
 }
