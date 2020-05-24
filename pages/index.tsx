@@ -39,7 +39,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
               <div className="wrap">
                 <div className="row d-flex">
                   <div className="col-md-6 d-flex">
-                    <div className="img d-flex align-self-stretch align-items-center" style={{ backgroundImage: `url(${foto.info ? foto.info : '/images/about.jpeg' })` }}>
+                    <div className="img d-flex align-self-stretch align-items-center" style={{ backgroundImage: `url(${foto.info ? foto.info.url : '/images/about.jpeg' })` }}>
                     </div>
                   </div>
                   <div className="col-md-6 py-md-5 text">
