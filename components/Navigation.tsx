@@ -6,15 +6,14 @@ export default class extends React.Component {
             <div className="container">
                 <a className="navbar-brand" href="/">Paola &amp; Daniel</a>
                 <button className="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="oi oi-menu" /> Menu
+                    <span className="oi oi-menu" />
                 </button>
                 <div className="collapse navbar-collapse" id="ftco-nav">
                     <ul className="navbar-nav nav ml-auto">
                         <li className="nav-item"><a href="#home-section" className="nav-link"><span>Inicio</span></a></li>
-                        <li className="nav-item"><a href="#groom-bride-section" className="nav-link"><span>Los novias</span></a></li>
-                        <li className="nav-item"><a href="#lovestory-section" className="nav-link"><span>Nuestra historia</span></a></li>
-                        <li className="nav-item"><a href="#when-where-section" className="nav-link"><span>¿Cuando y dónde?</span></a></li>
-                        <li className="nav-item"><a href="#rsvp-section" className="nav-link"><span>CONFIRMAR ASISTENCIA</span></a></li>
+                        <li className="nav-item"><a href="#nuestra-boda" className="nav-link"><span>Nuestra boda</span></a></li>
+                        <li className="nav-item"><a href="#lovestory-section" className="nav-link"><span>Historia</span></a></li>
+                        <li className="nav-item"><a href="#confirmar" className="nav-link"><span>CONFIRMAR ASISTENCIA</span></a></li>
                         <li className="nav-item"><a href="#gallery-section" className="nav-link"><span>Galería</span></a></li>
                     </ul>
                 </div>

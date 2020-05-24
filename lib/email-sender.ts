@@ -18,7 +18,7 @@ export const sendMail = async ({
             to,
             subject,
             text: content,
-            html: content,
+            // html: content,
         }, (err, result) => {
             if (err) {
                 return rej(err);

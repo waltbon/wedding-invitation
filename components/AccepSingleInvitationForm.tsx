@@ -3,6 +3,7 @@ import { executePost } from '../lib/api-call';
 
 interface IState {
   sent: boolean;
+  response: boolean;
 }
 
 export default class extends React.Component<{
@@ -11,17 +12,31 @@ export default class extends React.Component<{
 }, IState> {
   constructor(props) {
     super(props);
+    this.onHandleChange = this.onHandleChange.bind(this);
     this.sendConfirmation = this.sendConfirmation.bind(this);
     this.state = {
-      sent: false
+      sent: false,
+      response: true
     }
+  }
+
+  onHandleChange(e) {
+    // e.preventDefault();
+    const { checked, name } = e.target;
+    if (name === 'si')
+    this.setState({
+      response: checked
+    });
   }
 
   async sendConfirmation(e, accepted: boolean) {
     e.preventDefault();
+    const confirmation = `${this.state.response ? 'Sí asistirá' : 'No asistirá' }`;
     const data = {
-      invitado: this.props.invited,
-      aceptado: accepted ? 'Sí aceptó' : 'No aceptó'
+      subject: `${this.props.invited.nombre} ${confirmation.toLowerCase()}`,
+      message: `
+        ${this.props.invited.nombre} | ${this.props.invited.slug} | ID: ${this.props.invited.id} \n
+        ${confirmation}`
     };
     
     await executePost('/api/invitation-confirmation', data);
@@ -33,22 +48,20 @@ export default class extends React.Component<{
   render() {
     const hasMembers = this.props.family && Array.isArray(this.props.family.members) && !!this.props.family.members.length;
     return (
-      <div className="pt-4">
-        <h5 className="mb-4">Por favor confirma quiénes de la familia {this.props.family.apellidos} asistirán</h5>
+      <form className="pt-4">
+        <h3 className="text-underline text-info">
+        {this.props.invited.nombre}! Tu confirmación es muy importante</h3>
+        <p className="mb-4"> 
+          Por favor confirmanos si podrás acompañarnos marcando o desmarcando la siguiente casilla
+        </p>
         <div className="px-4 mb-5">
-          {
-            hasMembers && this.props.family.members.map(inv => {
-              return (
-                <div className="row mb-4 pretty p-icon p-round">
-                  <input type="checkbox" name={inv.slug} id={inv.slug} />
-                  <div className="state p-success">
-                    <i className="icon mdi mdi-check"></i>
-                    <label> {inv.nombre}</label>
-                  </div>
-                </div>
-              )
-            })
-          }
+          <div className="row mb-4 pretty p-icon p-round">
+            <input type="checkbox" name="si" id="si" defaultChecked={true} onChange={this.onHandleChange} />
+            <div className="state p-success">
+              <i className="icon mdi mdi-check"></i>
+              <label> Sí, asistiré </label>
+            </div>
+          </div>
         </div>
         <div>
           <div className="row text-left" hidden={this.state.sent}>
@@ -57,10 +70,10 @@ export default class extends React.Component<{
 
 
           <div className="row text-left" hidden={!this.state.sent}>
-            <h4>Gracias, hemos recibido tu respuesta!</h4>
+            <p>Gracias, hemos recibido tu respuesta!</p>
           </div>
         </div>
-      </div>
+      </form>
     )
   }
 }

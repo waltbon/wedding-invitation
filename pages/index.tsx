@@ -11,7 +11,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
       <section id="home" className="video-hero js-fullheight" style={{ height: '700px', backgroundImage: `url(${foto.principal.url})`, backgroundSize: 'cover', backgroundPosition: 'top center' }} data-stellar-background-ratio="0.5">
         <div className="overlay" />
         {/* <a className="player" data-property="{videoURL:'https://www.youtube.com/watch?v=Mjjw19B7rMk',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default',optimizeDisplay:true}" /> */}
-        <span></span>
+        {/* <span></span> */}
         <div className="container">
           <div className="row js-fullheight justify-content-center d-flex align-items-center">
             <div className="col-md-12">
@@ -32,7 +32,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
           </div>
         </div>
       </section>
-      <section className="ftco-section ftco-about ftco-no-pt ftco-no-pb" id="groom-bride-section">
+      <section className="ftco-section ftco-about ftco-no-pt ftco-no-pb" id="info">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -51,13 +51,17 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
                               invited && invited.nombre &&
                               <span className="text-secondary">{invited.nombre} </span>
                             }
-                            Te invitamos a <br /> nuestra boda </span>
+                            Te invitamos a nuestra boda </span>
                           <h2 className="mb-4 text-capitalize">Montiel Bonilla</h2>
                           <span className="icon flaticon-rose-variant-outline-with-vines" />
                           <span className="subheading">Que se celebrará el</span>
                           <p className="time mb-4"><span>19 junio, 2020</span></p>
                           <span className="subheading mb-5">Inicio 5:30</span>
-                          <span className="subheading mb-5">Estancia Novillo <br />Escazú</span>
+                          <a href={info.urlUbicacionWaze}>
+                          <span className="subheading">
+                            <i className="mdi mdi-map-marker"></i>Estancia Novillo, Escazú (ver en Waze)
+                          </span>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -68,7 +72,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
           </div>
         </div>
       </section>
-      <section className="ftco-section bg-section" style={{ marginBottom: 0, paddingBottom: '60px !important' }}>
+      <section id="nuestra-boda" className="ftco-section bg-section" style={{ marginBottom: 0, paddingBottom: '60px !important' }}>
         <div className="overlay-top" style={{ backgroundImage: 'url(images/top-bg.jpg)' }} />
         <div className="container">
           <div className="row justify-content-center pb-5">
@@ -88,7 +92,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
         </div>
       </section>
 
-      <section className="ftco-section bg-light">
+      <section id="confirmar" className="ftco-section bg-light">
         <div className="container">
           <div className="row justify-content-center pb-5">
             <div className="col-md-12 text-center heading-section ftco-animate">
@@ -128,7 +132,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
                 {
                    info.loveStory && Array.isArray(info.loveStory) && info.loveStory.map(lv => {
                      return (
-                      <li className={lv.invertido ? "timeline-inverted animate-box" : "animate-box"}>
+                      <li key={lv.id} className={lv.invertido ? "timeline-inverted animate-box" : "animate-box"}>
                         <div className="timeline-badge" style={{ backgroundImage: `url(${lv.imagen.url})` }} />
                         <div className="timeline-panel ftco-animate text-md-right">
                           <div className="overlay" />
@@ -149,35 +153,6 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
           </div>
         </div>
       </section>
-      <section className="ftco-section bg-light" id="when-where-section">
-        <div className="container">
-          <div className="row justify-content-center pb-5">
-            <div className="col-md-12 text-center heading-section ftco-animate">
-              <h2 className="mb-3">Itinerario</h2>
-            </div>
-          </div>
-          <div className="row">
-            {
-              info && Array.isArray(info.itinerario) && info.itinerario.map(item => {
-                return (
-                <div className="col-md-4 ftco-animate">
-                  <div className="place img" style={{ backgroundImage: 'url(images/place-1.jpg)' }}>
-                    <div className="text text-center">
-                      <span className="icon flaticon-reception-bell" />
-                      <h3>{item.titulo}</h3>
-                      <div dangerouslySetInnerHTML={{ __html: item.horas }}></div>
-                      <div dangerouslySetInnerHTML={{ __html: item.descripcion }}></div>
-                      <p><a href="#">+0 (123) 456 78 910</a></p>
-                      <p><a href="#" className="btn-custom">See Map</a></p>
-                    </div>
-                  </div>
-                </div>
-                )
-              })
-            }
-          </div>
-        </div>
-      </section>
       <section className="ftco-section" id="gallery-section">
         <div className="container-fluid px-md-4">
           <div className="row justify-content-center pb-5">
@@ -189,7 +164,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
             {
               foto && Array.isArray(foto.galeria) && foto.galeria.map(f => {
                 return (
-                <div className="col-md-3 ftco-animate">
+                <div key={f.id} className="col-md-3 ftco-animate">
                   <a href={f.url} className="gallery img image-popup d-flex align-items-center justify-content-center" style={{ backgroundImage: `url(${f.url})` }}>
                     <div className="icon d-flex align-items-center justify-content-center"><span className="ion-ios-image" /></div>
                   </a>
@@ -206,8 +181,13 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
           <div className="row">
             <div className="col-md-12 text-center">
               <p>{/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-                Los esperamos <i className="icon-heart color-danger" aria-hidden="true" /> by 
-                  <a href="https://www.waze.com/ul?preview_venue_id=180813923.1807877088.445363&navigate=yes" target="_blank"> </a>
+                Los esperamos <i className="icon-heart color-danger" aria-hidden="true" /> 
+                <br/>
+                <a href={info.urlUbicacionWaze}>
+                  <i className="mdi mdi-map-marker"></i> Estancia Novillo, Escazú <br/>
+                  <img src="/images/waze.png" alt="waze" width="60px"/>
+                </a>
+                  
                 {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}</p>
             </div>
           </div>
@@ -284,14 +264,17 @@ IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
   const pageResult = await service.executeQuery<any>({
     query: `query {
       info {
-        seccionNuestraBoda,
-        seccionConfirmarAsistencia,
+        seccionNuestraBoda
+        seccionConfirmarAsistencia
+        urlUbicacionWaze
         itinerario {
-          titulo,
-          horas,
+          id
+          titulo
+          horas
           descripcion
         }
         loveStory {
+          id
           titulo
           fecha
           descripcion
@@ -307,6 +290,7 @@ IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
           alt
         }
         galeria {
+          id
           url
         }
       }
@@ -323,7 +307,6 @@ IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
       break;
     case 'inv':
       invited = await getInvited(invitadoSlug);
-      family = invited.family;
       break;
     default:
       break;
