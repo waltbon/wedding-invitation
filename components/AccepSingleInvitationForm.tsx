@@ -39,7 +39,7 @@ export default class extends React.Component<{
         ${confirmation}`
     };
     
-    await executePost('/api/invitation-confirmation', data);
+    await executePost(`${process.env.BASE_API}/api/invitation-confirmation`, data);
     this.setState({
       sent: true
     })

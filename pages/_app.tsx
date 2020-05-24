@@ -1,5 +1,5 @@
 import React from 'react';
-import App, { AppInitialProps } from 'next/app';
+import App from 'next/app';
 
 class PaolaApp extends App {
     render() {

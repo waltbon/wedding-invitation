@@ -49,7 +49,7 @@ export default class extends React.Component<{
       subject: `Familia ${this.props.family.apellidos} ha respondido`,
       message
     };
-    await executePost('/api/invitation-confirmation', data);
+    await executePost(`${process.env.BASE_API}/api/invitation-confirmation`, data);
     this.setState({
       sent: true
     })
@@ -68,7 +68,7 @@ export default class extends React.Component<{
           {
             hasMembers && this.state.members.map(inv => {
               return (
-                <div className="row mb-4 pretty p-icon p-round">
+                <div className="row mb-4 pretty p-icon p-round" key={inv.id}>
                   <input type="checkbox" name={inv.id} id={inv.id} defaultChecked={true} onChange={this.onHandleChange} />
                   <div className="state p-success">
                     <i className="icon mdi mdi-check"></i>
