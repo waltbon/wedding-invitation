@@ -8,8 +8,10 @@ export const sendMail = async ({
     const domain = process.env.MAILGUN_DOMAIN;
     const from = process.env.NO_REPLY_EMAIL;
     const apiKey = process.env.MAILGUN_PRIVATE_KEY;
+    console.log("apiKey", apiKey)
     const mailgun = Mailgun({
-        apiKey, domain
+        apiKey, 
+        domain
     });
 
     return new Promise((res, rej) => {

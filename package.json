@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node server/index.ts",
+    "dev": "ts-node --project tsconfig.server.json server/index.ts",
     "build:server": "tsc --project tsconfig.server.json",
     "build:next": "next build",
     "build": "npm run build:next && npm run build:server",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@now/node": "^1.6.1",
+    "@types/mailgun-js": "^0.22.7",
     "@types/node": "^14.0.1",
     "@types/react": "^16.9.32",
     "cross-env": "^7.0.2",
