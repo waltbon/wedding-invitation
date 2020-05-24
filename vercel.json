@@ -4,7 +4,7 @@
       { "src": "/api/invitation-confirmation", "methods": ["POST"], "dest": "/api/invitation-confirmation.ts" }
     ],
     "functions": {
-      "/api/invitation-confirmation": { 
+      "api/invitation-confirmation.ts": { 
         "maxDuration": 10
       }
     }
