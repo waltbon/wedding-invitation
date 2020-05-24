@@ -49,7 +49,7 @@ export default class extends React.Component<{
       subject: `Familia ${this.props.family.apellidos} ha respondido`,
       message
     };
-    await executePost(`${process.env.BASE_API}/api/invitation-confirmation`, data);
+    await executePost(`/api/invitation-confirmation`, data);
     this.setState({
       sent: true
     })
