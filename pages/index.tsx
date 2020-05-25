@@ -133,7 +133,7 @@ const IndexPage: NextPage<any> = ({ family, invited, info, foto, invitationType 
                    info.loveStory && Array.isArray(info.loveStory) && info.loveStory.map(lv => {
                      return (
                       <li key={lv.id} className={lv.invertido ? "timeline-inverted animate-box" : "animate-box"}>
-                        <div className="timeline-badge" style={{ backgroundImage: `url(${lv.imagen.url})` }} />
+                        <div className="timeline-badge" style={{ backgroundImage: `url(${ lv.imagen ? lv.imagen.url :''})` }} />
                         <div className="timeline-panel ftco-animate text-md-right">
                           <div className="overlay" />
                           <div className="timeline-heading">
