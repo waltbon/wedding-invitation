@@ -343,17 +343,20 @@ IndexPage.getInitialProps = () => {
       urlUbicacionWaze: 'https://waze.com/ul/hd1u0mqtyh ',
       seccionConfirmarAsistencia: '<p class="p1">Valoramos mucho que anticipadamente nos puedan confirmar su asistencia a m&aacute;s tardar el <strong>viernes 29 de mayo.</strong></p><p class="p1">Sin duda, el regalo m&aacute;s valioso que tenemos es compartir nuestra felicidad con ustedes. Si desean apoyarnos con nuestro proyecto de vida, recibiremos con alegr&iacute;a y gratitud cada presente. Hemos dispuesto nuestras cuentas en caso que prefieran bendecirnos con un regalo en efectivo, o tambi&eacute;n pueden optar por nuestra lista de regalos en la tienda SIMAN (Multiplaza Este y Escaz&uacute;).</p><p><strong><em>Colones</em></strong></p><p><em>BAC: 921007704</em></p><p><em><span style="background-color: transparent; font-family: inherit; font-size: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-weight: inherit;">IBAN: CR19010200009210077042</span></em><em><span style="background-color: transparent; font-family: inherit; font-size: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-weight: inherit;"></span></em></p><p><strong><em></em></strong></p><p><strong><em>D&oacute;lares</em></strong></p><p><em>BAC: 937982379</em></p><p><em>IBAN: CR16010200009379823798</em></p><p><em></em></p><p><em>Daniel Montiel Castro, c&eacute;dula 115440553</em></p><p></p><p>Si prefieres ir a SIMAN, el nombre y c&oacute;digo de nuestra lista es: Montiel Bonilla, 121475.</p><p class="p1">&iexcl;Gracias por ser parte de nuestra historia!</p><p class="p1">&nbsp;Daniel y Paola</p>',
       loveStory: [{
+        id: 'Abril2016',
         fecha: 'Abril 2016',
         titulo: 'Nos conocimos',
         descripcion: 'Nuestra amistad nació el abril del 2016',
         imagen: setImage('dani-pao-36.jpg')
       }, {
+        id: 'Enero2018',
         fecha: 'Enero 2018',
         titulo: 'Nos hicimos novios',
         invertido: true,
         descripcion: '<p>Iniciamos nuestra aventura como novios en el restaurante Ram Luna el 9 de enero del 2018&nbsp;</p>',
         imagen: setImage('dyp3.jpeg')
       }, {
+        id: '8dejunio2019',
         fecha: '8 de junio 2019',
         titulo: 'Nos comprometimos',
         descripcion: 'Iniciamos nuestra cuenta regresiva.',
