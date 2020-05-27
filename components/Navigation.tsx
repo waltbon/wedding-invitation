@@ -13,7 +13,7 @@ export default class extends React.Component {
                         <li className="nav-item"><a href="#home-section" className="nav-link"><span>Inicio</span></a></li>
                         <li className="nav-item"><a href="#nuestra-boda" className="nav-link"><span>Nuestra boda</span></a></li>
                         <li className="nav-item"><a href="#lovestory-section" className="nav-link"><span>Historia</span></a></li>
-                        <li className="nav-item"><a href="#confirmar" className="nav-link"><span>CONFIRMAR ASISTENCIA</span></a></li>
+                        {/* <li className="nav-item"><a href="#confirmar" className="nav-link"><span>CONFIRMAR ASISTENCIA</span></a></li> */}
                         <li className="nav-item"><a href="#gallery-section" className="nav-link"><span>Galería</span></a></li>
                     </ul>
                 </div>

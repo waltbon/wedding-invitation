@@ -256,51 +256,52 @@ const getFamilyMembers = async (familyId: string) => {
   return result.allInvitados;
 }
 
-IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
+IndexPage.getInitialProps = () => {
+  const query = {} as any;
   const invitadoSlug = query ? query.invitado as string : '';
   const familiaSlug = query ? query.familia as string : '';
 
   const service = new DatoCMSService();
-  const pageResult = await service.executeQuery<any>({
-    query: `query {
-      info {
-        seccionNuestraBoda
-        seccionConfirmarAsistencia
-        urlUbicacionWaze
-        horaInicio
-        itinerario {
-          id
-          titulo
-          horas
-          descripcion
-        }
-        loveStory {
-          id
-          titulo
-          fecha
-          descripcion
-          invertido
-          imagen {
-            url
-          }
-        }
-      }
-      foto {
-        info {
-          url
-          alt
-        }
-        principal {
-          url
-          alt
-        }
-        galeria {
-          id
-          url
-        }
-      }
-    }`
-  });
+  // const pageResult = await service.executeQuery<any>({
+  //   query: `query {
+  //     info {
+  //       seccionNuestraBoda
+  //       seccionConfirmarAsistencia
+  //       urlUbicacionWaze
+  //       horaInicio
+  //       itinerario {
+  //         id
+  //         titulo
+  //         horas
+  //         descripcion
+  //       }
+  //       loveStory {
+  //         id
+  //         titulo
+  //         fecha
+  //         descripcion
+  //         invertido
+  //         imagen {
+  //           url
+  //         }
+  //       }
+  //     }
+  //     foto {
+  //       info {
+  //         url
+  //         alt
+  //       }
+  //       principal {
+  //         url
+  //         alt
+  //       }
+  //       galeria {
+  //         id
+  //         url
+  //       }
+  //     }
+  //   }`
+  // });
 
   const invitationType = !!invitadoSlug ? 'inv' : !!familiaSlug ? 'fam' : null;
 
@@ -308,28 +309,60 @@ IndexPage.getInitialProps = async ({ req, query }): Promise<any> => {
   let invited;
   switch (invitationType) {
     case 'fam':
-      family = await getFamily(familiaSlug);
+      // family = await getFamily(familiaSlug);
       break;
     case 'inv':
-      invited = await getInvited(invitadoSlug);
+      // invited = await getInvited(invitadoSlug);
       break;
     default:
       break;
   }
 
   if (family) {
-    const familyMembers = await getFamilyMembers(family.id);
-    family['members'] = familyMembers || [];
+    // const familyMembers = await getFamilyMembers(family.id);
+    // family['members'] = familyMembers || [];
+  }
+
+  function setImage(url: string) {
+    return {
+      url: `/images/boda/${url}`
+    }
   }
 
   const data = {
     invited,
     family,
-    foto: pageResult.foto,
-    info: pageResult.info,
+    foto: {
+      principal: setImage('dani-pao-36.jpg'),
+      info: setImage('dyp3.jpeg'),
+      galeria: []
+    },
+    info: {
+      horaInicio: '4:00 pm',
+      seccionNuestraBoda: '<p class="p1">Estamos muy felices de invitarte a compartir una cena &iacute;ntima en familia para celebrar nuestra uni&oacute;n. Sabemos que estamos en tiempos distintos, por lo tanto hemos considerado compartirte estos detalles relevantes para nuestra boda:</p><ol class="ol1"><li class="li1">Celebraremos &uacute;nicamente nuestra ceremonia y cena. No habr&aacute; baile, DJ, ni ninguna actividad que infrinja las recomendaciones de distanciamiento social.</li><li class="li1">Durante la cena los meseros nos servir&aacute;n la comida, de modo que no ser&aacute; estilo buffet.</li><li class="li1">La cantidad de invitados no superar&aacute; el 45% de la capacidad de Estancia Novillo. Por lo tanto, tendremos suficiente espacio para cenar en las respectivas &ldquo;burbujas sociales&rdquo;, seg&uacute;n los permisos del Ministerio de Salud.</li><li class="li1">Nuestros invitados disfrutar&aacute;n de la ceremonia desde las mesas, por lo tanto no habr&aacute; traslados a distintas ubicaciones.</li><li class="li1">Estancia Novillo estar&aacute; reservado &uacute;nica y exclusivamente para nuestra actividad. Adem&aacute;s, consideramos los cuidados sanitarios recomendadas.</li><li class="li1">El horario de restricci&oacute;n vehicular no ser&aacute; un problema ya que hemos planificado el evento tomando en cuenta el tiempo de regreso a sus hogares.</li><li class="li1">Hasta el d&iacute;a de hoy actuamos dentro de los permisos anunciados por el Ministerio de Salud, sin embargo estaremos atentos y sujetos a posibles cambios.</li></ol>',
+      urlUbicacionWaze: 'https://waze.com/ul/hd1u0mqtyh ',
+      seccionConfirmarAsistencia: '<p class="p1">Valoramos mucho que anticipadamente nos puedan confirmar su asistencia a m&aacute;s tardar el <strong>viernes 29 de mayo.</strong></p><p class="p1">Sin duda, el regalo m&aacute;s valioso que tenemos es compartir nuestra felicidad con ustedes. Si desean apoyarnos con nuestro proyecto de vida, recibiremos con alegr&iacute;a y gratitud cada presente. Hemos dispuesto nuestras cuentas en caso que prefieran bendecirnos con un regalo en efectivo, o tambi&eacute;n pueden optar por nuestra lista de regalos en la tienda SIMAN (Multiplaza Este y Escaz&uacute;).</p><p><strong><em>Colones</em></strong></p><p><em>BAC: 921007704</em></p><p><em><span style="background-color: transparent; font-family: inherit; font-size: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-weight: inherit;">IBAN: CR19010200009210077042</span></em><em><span style="background-color: transparent; font-family: inherit; font-size: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-weight: inherit;"></span></em></p><p><strong><em></em></strong></p><p><strong><em>D&oacute;lares</em></strong></p><p><em>BAC: 937982379</em></p><p><em>IBAN: CR16010200009379823798</em></p><p><em></em></p><p><em>Daniel Montiel Castro, c&eacute;dula 115440553</em></p><p></p><p>Si prefieres ir a SIMAN, el nombre y c&oacute;digo de nuestra lista es: Montiel Bonilla, 121475.</p><p class="p1">&iexcl;Gracias por ser parte de nuestra historia!</p><p class="p1">&nbsp;Daniel y Paola</p>',
+      loveStory: [{
+        fecha: 'Abril 2016',
+        titulo: 'Nos conocimos',
+        descripcion: 'Nuestra amistad nació el abril del 2016',
+        imagen: setImage('dani-pao-36.jpg')
+      }, {
+        fecha: 'Enero 2018',
+        titulo: 'Nos hicimos novios',
+        invertido: true,
+        descripcion: '<p>Iniciamos nuestra aventura como novios en el restaurante Ram Luna el 9 de enero del 2018&nbsp;</p>',
+        imagen: setImage('dyp3.jpeg')
+      }, {
+        fecha: '8 de junio 2019',
+        titulo: 'Nos comprometimos',
+        descripcion: 'Iniciamos nuestra cuenta regresiva.',
+        imagen: setImage('dyp3.jpeg')
+      }]
+    },
     invitationType
   }
-  return data;
+  return data
 }
 
 export default IndexPage;
